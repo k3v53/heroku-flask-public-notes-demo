@@ -1,7 +1,12 @@
 import psycopg2
 import os
 from flask import Flask, redirect, render_template, request
-DATABASE_URL = os.environ.get('DATABASE_URL')
+def heroku_get_DATABASE_URL():
+    ret = os.popen('heroku config:get DATABASE_URL --app {}'.format(os.environ.get("HEROKU_APP")))
+    return ret.read()
+
+
+DATABASE_URL = os.environ.get('DATABASE_URL') or heroku_get_DATABASE_URL()
 app = Flask(__name__)
 conn = None
 if DATABASE_URL:
@@ -13,7 +18,7 @@ def index():
 if conn:
     @app.route('/sql_create', methods=["GET"])
     def sql_create():
-        if request.args.get('passwd') == "supersecretpasswordkey":
+        if request.args.get('passwd') == os.environ.get("ClearDB_Key"):
             with conn.cursor() as cursor:
                 cursor.execute("""--sql
                 DROP TABLE IF EXISTS public.note;
