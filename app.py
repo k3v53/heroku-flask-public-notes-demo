@@ -17,7 +17,7 @@ if conn:
             cursor.execute("""--sql
         DROP TABLE IF EXISTS public.note;
         CREATE TABLE IF NOT EXISTS public.note (
-        note_id integer SERIAL PRIMARY KEY,
+        note_id SERIAL PRIMARY KEY,
         created_at timestamp without time zone NOT NULL,
         note_text text NULL
     );""")
