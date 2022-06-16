@@ -24,12 +24,13 @@ if conn:
     ADD
         CONSTRAINT note_pkey PRIMARY KEY (note_id);
         """)
-        return True
+        return "Created 'note' table"
     @app.route('/sql_insert', methods=["GET"])
     def sql_insert():
+        note = request.args.get('note')
         with conn.cursor() as cursor:
-            cursor.execute(f"INSERT INTO note VALUES ({request.args.get('note')})")
-        return True
+            cursor.execute(f"INSERT INTO note VALUES ({note})")
+        return f'Inserted {note}'
     @app.route('/sql_select')
     def sql_select():
         with conn.cursor() as cursor:
