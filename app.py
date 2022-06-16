@@ -32,5 +32,5 @@ if conn:
     def sql_select():
         with conn.cursor() as cursor:
             cursor.execute("SELECT * FROM note")
-        return cursor.fetchall()
+            return cursor.fetchall()
 if __name__ == '__main__': app.run(debug=True)
