@@ -31,6 +31,6 @@ if conn:
     @app.route('/sql_select')
     def sql_select():
         with conn.cursor() as cursor:
-            cursor.execute("SELECT * FROM note")
+            cursor.execute("SELECT * FROM public.note")
             return str(cursor.fetchall())
 if __name__ == '__main__': app.run(debug=True)
