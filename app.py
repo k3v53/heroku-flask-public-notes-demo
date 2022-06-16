@@ -18,7 +18,7 @@ if conn:
         DROP TABLE IF EXISTS public.note;
         CREATE TABLE public.note (
         note_id SERIAL PRIMARY KEY,
-        created_at timestamp without time zone NOT NULL,
+        created_at timestamp without time zone NOT NULL DEFAULT NOW(),
         note_text text NULL
     );""")
         return "Created 'note' table"
@@ -26,7 +26,7 @@ if conn:
     def sql_insert():
         note = request.args.get('note')
         with conn.cursor() as cursor:
-            cursor.execute(f"INSERT INTO public.note(note_text) VALUES (\"{note}\")")
+            cursor.execute(f"INSERT INTO public.note(note_text) VALUES (\'{note}\')")
         return f'Inserted {note}'
     @app.route('/sql_select')
     def sql_select():
