@@ -35,11 +35,11 @@ if conn:
             return render_template("sql_insert.html")
     @app.route('/sql_select', methods=["GET"])
     def sql_select():
-        sql_query = "SELECT * FROM public.note"
+        sql_query = "SELECT note_id, note_text, created_at FROM public.note"
         note_id = request.args.get('note_id')
         if note_id:
             sql_query+=f" WHERE note_id={note_id};"
         with conn.cursor() as cursor:            
             cursor.execute(sql_query)
-            return str(cursor.fetchall())
+            return render_template("sql_select.html",notes=cursor.fetchall())
 if __name__ == '__main__': app.run(debug=True)
