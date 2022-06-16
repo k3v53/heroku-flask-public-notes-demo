@@ -32,7 +32,7 @@ if conn:
                 cursor.execute(f"INSERT INTO public.note(note_text) VALUES (\'{note}\') RETURNING note_id;commit;")
             return redirect(f"/sql_select?note_id={cursor.fetchone()[0]}")
         else:
-            render_template("sql_insert.html")
+            return render_template("sql_insert.html")
     @app.route('/sql_select', methods=["GET"])
     def sql_select():
         note_id = request.args.get('note_id')
