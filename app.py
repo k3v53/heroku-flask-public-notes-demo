@@ -35,7 +35,7 @@ if conn:
             return render_template("sql_insert.html")
     @app.route('/sql_select', methods=["GET"])
     def sql_select():
-        sql_query = "SELECT note_id, note_text, created_at FROM public.note"
+        sql_query = "SELECT note_id, note_text, created_at FROM public.note ORDER BY note_id DESC LIMIT 1000"
         note_id = request.args.get('note_id')
         if note_id:
             sql_query+=f" WHERE note_id={note_id};"
