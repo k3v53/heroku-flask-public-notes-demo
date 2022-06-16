@@ -14,16 +14,13 @@ if conn:
     @app.route('/sql_create')
     def sql_create():
         with conn.cursor() as cursor:
-            cursor.execute("""CREATE TABLE IF NOT EXISTS public.note (
+            cursor.execute("""--sql
+        DROP TABLE IF EXISTS public.note;
+        CREATE TABLE IF NOT EXISTS public.note (
+        note_id integer SERIAL PRIMARY KEY,
         created_at timestamp without time zone NOT NULL,
-        note_text text NULL,
-        note_id integer NOT NULL
-    );
-    ALTER TABLE
-        public.note
-    ADD
-        CONSTRAINT note_pkey PRIMARY KEY (note_id);
-        """)
+        note_text text NULL
+    );""")
         return "Created 'note' table"
     @app.route('/sql_insert', methods=["GET"])
     def sql_insert():
