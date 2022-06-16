@@ -14,7 +14,7 @@ if conn:
     @app.route('/sql_create')
     def sql_create():
         with conn.cursor() as cursor:
-            cursor.execute("""CREATE TABLE IF NOT EXISTS note (
+            cursor.execute("""CREATE TABLE IF NOT EXISTS public.note (
         created_at timestamp without time zone NOT NULL,
         note_text text NULL,
         note_id integer NOT NULL
@@ -29,7 +29,7 @@ if conn:
     def sql_insert():
         note = request.args.get('note')
         with conn.cursor() as cursor:
-            cursor.execute(f"INSERT INTO note(note_text) VALUES (\"{note}\")")
+            cursor.execute(f"INSERT INTO public.note(note_text) VALUES (\"{note}\")")
         return f'Inserted {note}'
     @app.route('/sql_select')
     def sql_select():
