@@ -15,18 +15,20 @@ if conn:
     def sql_create():
         with conn.cursor() as cursor:
             cursor.execute("""--sql
-        DROP TABLE IF EXISTS public.note;
-        CREATE TABLE public.note (
-        note_id SERIAL PRIMARY KEY,
-        created_at timestamp without time zone NOT NULL DEFAULT NOW(),
-        note_text text NULL
-    );""")
+            DROP TABLE IF EXISTS public.note;
+            CREATE TABLE public.note (
+            note_id SERIAL PRIMARY KEY,
+            created_at timestamp without time zone NOT NULL DEFAULT NOW(),
+            note_text text NULL
+            );
+            commit;""")
+        
         return "Created 'note' table"
     @app.route('/sql_insert', methods=["GET"])
     def sql_insert():
         note = request.args.get('note')
         with conn.cursor() as cursor:
-            cursor.execute(f"INSERT INTO public.note(note_text) VALUES (\'{note}\')")
+            cursor.execute(f"INSERT INTO public.note(note_text) VALUES (\'{note}\');commit;")
         return f'Inserted "{note}"'
     @app.route('/sql_select')
     def sql_select():
