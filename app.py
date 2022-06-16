@@ -24,7 +24,7 @@ if conn:
             commit;""")
         
         return "Created 'note' table"
-    @app.route('/sql_insert', methods=["POST"])
+    @app.route('/sql_insert', methods=["GET","POST"])
     def sql_insert():
         note = request.form.get('note')
         if(note):
