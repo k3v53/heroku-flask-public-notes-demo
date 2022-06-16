@@ -10,9 +10,9 @@
 <body>
   {%for note in notes%}
   <div class="note_box">
-    <span>ID: {{note[0]}}</span>
+    <span class="note_id">ID: {{note[0]}}</span>
     <p>{{note[1]}}</p>
-    <span>{{note[2]}}</span>
+    <span class="note_timestamp">{{note[2]}}</span>
   </div>
 {%endfor%}
 </body>
