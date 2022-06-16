@@ -29,7 +29,7 @@ if conn:
     def sql_insert():
         note = request.args.get('note')
         with conn.cursor() as cursor:
-            cursor.execute(f"INSERT INTO note(note_text) VALUES ({note})")
+            cursor.execute(f"INSERT INTO note(note_text) VALUES (\"{note}\")")
         return f'Inserted {note}'
     @app.route('/sql_select')
     def sql_select():
