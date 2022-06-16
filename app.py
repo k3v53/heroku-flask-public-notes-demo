@@ -14,7 +14,7 @@ if conn:
     @app.route('/sql_create')
     def sql_create():
         with conn.cursor() as cursor:
-            cursor.execute("""CREATE TABLE IF NOT EXISTS public.note (
+            cursor.execute("""CREATE TABLE IF NOT EXISTS note (
         created_at timestamp without time zone NOT NULL,
         note_text text NULL,
         note_id integer NOT NULL
