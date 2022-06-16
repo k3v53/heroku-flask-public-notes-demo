@@ -11,19 +11,20 @@ def index():
     return render_template('index.html')
 
 if conn:
-    @app.route('/sql_create')
+    @app.route('/sql_create', methods=["GET"])
     def sql_create():
-        with conn.cursor() as cursor:
-            cursor.execute("""--sql
-            DROP TABLE IF EXISTS public.note;
-            CREATE TABLE public.note (
-            note_id SERIAL PRIMARY KEY,
-            created_at timestamp without time zone NOT NULL DEFAULT NOW(),
-            note_text text NULL
-            );
-            commit;""")
-        
-        return "Created 'public.note' table"
+        if request.args.get('passwd') == "supersecretpasswordkey":
+            with conn.cursor() as cursor:
+                cursor.execute("""--sql
+                DROP TABLE IF EXISTS public.note;
+                CREATE TABLE public.note (
+                note_id SERIAL PRIMARY KEY,
+                created_at timestamp without time zone NOT NULL DEFAULT NOW(),
+                note_text text NULL
+                );
+                commit;""")
+            return "Dropped and Created 'public.note' table"
+        return "Need password"
     @app.route('/sql_insert', methods=["GET","POST"])
     def sql_insert():
         note = request.form.get('note')
