@@ -23,7 +23,7 @@ if conn:
             );
             commit;""")
         
-        return "Created 'note' table"
+        return "Created 'public.note' table"
     @app.route('/sql_insert', methods=["GET","POST"])
     def sql_insert():
         note = request.form.get('note')
