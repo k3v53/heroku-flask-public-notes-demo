@@ -27,10 +27,10 @@ if conn:
         note = request.args.get('note')
         with conn.cursor() as cursor:
             cursor.execute(f"INSERT INTO public.note(note_text) VALUES (\'{note}\')")
-        return f'Inserted {note}'
+        return f'Inserted "{note}"'
     @app.route('/sql_select')
     def sql_select():
         with conn.cursor() as cursor:
             cursor.execute("SELECT * FROM note")
-            return cursor.fetchall()
+            return str(cursor.fetchall())
 if __name__ == '__main__': app.run(debug=True)
