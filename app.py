@@ -11,7 +11,7 @@ def index():
     return render_template('index.html')
 
 if conn:
-    @app.route('/sql/create')
+    @app.route('/sql_create')
     def sql_create():
         with conn.cursor() as cursor:
             cursor.execute("""CREATE TABLE IF NOT EXISTS public.note (
@@ -25,12 +25,12 @@ if conn:
         CONSTRAINT note_pkey PRIMARY KEY (note_id);
         """)
         return True
-    @app.route('/sql/insert', methods=["GET"])
+    @app.route('/sql_insert', methods=["GET"])
     def sql_insert():
         with conn.cursor() as cursor:
             cursor.execute(f"INSERT INTO note VALUES ({request.args.get('note')})")
         return True
-    @app.route('/sql/select')
+    @app.route('/sql_select')
     def sql_select():
         with conn.cursor() as cursor:
             cursor.execute("SELECT * FROM note")
