@@ -7,7 +7,10 @@
   <title>Test SQL</title>
 </head>
 <body>
-  <h2>Select Hello world</h2>
-  <p>{{sql_query_result}}</p>
+  <h2>Insertar una nueva nota</h2>
+  <form action="/sql_insert" method="post">
+    <textarea name="note" id="note" cols="30" rows="10"></textarea>
+    <button type="submit">Subir</button>
+  </form>
 </body>
 </html>
