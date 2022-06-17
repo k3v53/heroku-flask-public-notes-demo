@@ -8,6 +8,13 @@
   <title>Notes SQL Select</title>
 </head>
 <body>
+  <div class="note_box">
+    <span class="note_id">ID: New Note</span>
+    <form class="note_form" action="/sql_insert" method="post">
+      <textarea name="note" id="note"></textarea>
+    <button type="submit">Subir</button>
+  </form>
+  </div>
   {%for note in notes%}
   <div class="note_box">
     <span class="note_id">ID: {{note[0]}}</span>

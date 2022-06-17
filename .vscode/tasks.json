@@ -4,17 +4,16 @@
   "version": "2.0.0",
   "options": {"env": {
     "HEROKU_APP":"python-flask-3",
-
+    "SSLMODE":"require"
     }},
   "tasks": [
     {
       "label": "Run flask server",
       "type": "shell",
-      "options": {
-      },
       "command": "python",
       "args": ["app.py"],
       "problemMatcher": []
     }
-  ]
+  ],
+  "isBackground": true
 }
